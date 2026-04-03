@@ -1,22 +1,18 @@
 #include "actions.h"
 
-// Balayage en colonnes: bas, puis haut, etc
+// Joueur de test: construit de l'historique puis declenche fork.
 char get_action() {
     static int steps = 0;
-    static int direction = 0; // 0 = bas, 1 = haut
-    
     steps++;
 
-    // Fin de colonne : on va a droite et on inverse le sens vertical
-    if (steps % 100 == 0) {
-        direction = !direction;
-        return ACTION_MOVE_R;
+    if (steps % 70 == 0) {
+        return ACTION_FORK;
     }
-
-    // Sinon on continue verticalement
-    if (direction == 0) {
-        return ACTION_MOVE_D;
-    } else {
+    if (steps % 18 == 0) {
+        return ACTION_DASH_D;
+    }
+    if (steps % 9 == 0) {
         return ACTION_MOVE_U;
     }
+    return ACTION_MOVE_D;
 }

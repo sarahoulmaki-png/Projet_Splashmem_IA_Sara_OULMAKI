@@ -24,4 +24,14 @@
 // Ne rien faire ce tour.
 #define ACTION_STILL      13
 
+// Actions avancees.
+#define ACTION_BOMB       14
+#define ACTION_FORK       15
+#define ACTION_CLEAN      16
+#define ACTION_MUTE       17
+#define ACTION_SWAP       18
+
+// Nombre total d'actions (borne exclusive).
+#define ACTION_NUMBER     19
+
 #endif

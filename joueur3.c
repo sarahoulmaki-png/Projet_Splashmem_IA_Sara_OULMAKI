@@ -1,19 +1,18 @@
 #include "actions.h"
 
-// Parcours en serpent : une ligne a droite, la suivante a gauche
-
+// Joueur de test: alterne mute et swap pour verifier les effets de couleur.
 char get_action() {
     static int steps = 0;
-    static int line = 0;
-
     steps++;
 
-    // Fin de ligne : on descend
-    if (steps % 100 == 0) {
-        line++;
-        return ACTION_MOVE_D;
+    if (steps % 60 == 0) {
+        return ACTION_SWAP;
     }
-
-    // On alterne droite/gauche selon la ligne
-    return (line % 2 == 0) ? ACTION_MOVE_R : ACTION_MOVE_L;
+    if (steps % 30 == 0) {
+        return ACTION_MUTE;
+    }
+    if (steps % 12 == 0) {
+        return ACTION_TELEPORT_R;
+    }
+    return ACTION_MOVE_U;
 }

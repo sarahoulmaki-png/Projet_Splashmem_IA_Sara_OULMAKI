@@ -24,7 +24,7 @@ endif
 # --- Flags ---
 # On récupère les flags de compilation et de lien via sdl2-config
 CFLAGS = -Wall -Wextra -I. $(shell $(SDL2_CONFIG) --cflags)
-LDFLAGS = $(DL_LIB) $(shell $(SDL2_CONFIG) --libs) -lSDL2_ttf -lSDL2_mixer
+LDFLAGS = $(DL_LIB) $(shell $(SDL2_CONFIG) --libs) -lSDL2_ttf
 
 # --- Cibles ---
 TARGET = splash
@@ -37,12 +37,12 @@ PLAYERS = p1.so p2.so p3.so p4.so
 all: $(TARGET) $(PLAYERS)
 
 # 2. Compilation du moteur principal (le jeu)
-$(TARGET): splash.c
-	$(CC) $(CFLAGS) splash.c -o $(TARGET) $(LDFLAGS)
+$(TARGET): splash.c splash_game.c splash_game.h actions.h
+	$(CC) $(CFLAGS) splash.c splash_game.c -o $(TARGET) $(LDFLAGS)
 
 # 3. Compilation générique des joueurs en bibliothèques partagées (.so)
 # % est un joker qui correspond au numéro du joueur
-p%.so: joueur%.c
+p%.so: joueur%.c actions.h
 	$(CC) $(CFLAGS) -fPIC -shared $< -o $@
 
 # 4. Lancement du jeu

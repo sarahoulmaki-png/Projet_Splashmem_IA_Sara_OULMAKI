@@ -1,14 +1,18 @@
 #include "actions.h"
 
-// Va surtout a droite, puis descend de temps en temps
+// Joueur de test: avance, pose des bombes regulierement, puis tente clean.
 char get_action() {
     static int steps = 0;
-    static int direction __attribute__((unused)) = 0;
-    
     steps++;
-    // Tous les 100 coups, on descend d'une case
-    if (steps % 100 == 0) {
-        return ACTION_MOVE_D;
+
+    if (steps % 90 == 0) {
+        return ACTION_CLEAN;
+    }
+    if (steps % 25 == 0) {
+        return ACTION_BOMB;
+    }
+    if (steps % 40 == 0) {
+        return ACTION_TELEPORT_D;
     }
     return ACTION_MOVE_R;
 }
